@@ -1,24 +1,64 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import { useState } from "react";
 
 function App() {
+
+
+  const products = [
+    {
+      id: 1,
+      name: "Product 1"
+    },
+    {
+      id: 2,
+      name: "Product 2"
+    },
+    {
+      id: 3,
+      name: "Product 3"
+    }
+  ];
+
+  const [selectedProductIDs, setSelectedProductIDs] = useState([]);
+     
+  const addIDToSelection = (id) => {
+      if (!selectedProductIDs.includes(id)) {
+         setSelectedProductIDs((selProds) => [...selProds, id]);
+         console.log(selectedProductIDs.length);
+         
+     
+      }
+      console.log(selectedProductIDs);
+  };
+
+  const productNumber = selectedProductIDs.length; 
+
+
+  const productItems = products.map((product) =>  <div className="col d-flex"><div className="card p-4"><li key={product.id}>{product.name}</li><button className="btn btn-primary" onClick={() => addIDToSelection(product.id)}>Select</button></div></div>);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div className="container product-container d-flex">
+    
+     <div className="row d-flex p-4">
+        
+    <h1>{productNumber} Product(s)</h1>
+        {productItems}
+   
+     </div> 
+
     </div>
+
+    <div className="container">
+    <div className="row d-flex p-4">
+   
+    <p>Selected Product IDs: {selectedProductIDs.join(", ")}</p> 
+
+    </div>    
+    </div>
+  </div>
   );
 }
 
