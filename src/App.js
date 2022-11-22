@@ -26,20 +26,15 @@ function App() {
   const addIDToSelection = (id) => {
       if (!selectedProductIDs.includes(id)) {
          setSelectedProductIDs((selProds) => [...selProds, id]);
-      
-         console.log(selectedProductIDs.length + 1);
-      
-         
+         console.log(selectedProductIDs.length + 1);        
      
-      }  
-
-
+      }
   };
 
   // remove button function
   const removeIDFromSelection = (id) => {
     if (selectedProductIDs.includes(id)) {
-      setSelectedProductIDs(products.filter(product => product.id !== product.id));
+      setSelectedProductIDs(products.filter(product => product.id !== id));
       console.log(selectedProductIDs.length - 1);
       
     }
@@ -57,9 +52,9 @@ function App() {
       <div className="row p-2">
           <button className="btn btn-primary" onClick={() => { addIDToSelection(product.id)}}>Select</button>
       </div>
-      <div className="row p-2">      
+      {/* <div className="row p-2">      
       <button className="btn btn-danger" onClick={() => { removeIDFromSelection(product.id)}}>Remove</button>
-      </div>
+      </div> */}
    
       </div>
     </div>
