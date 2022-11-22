@@ -2,6 +2,7 @@ import './App.css';
 import React from "react";
 import { useState } from "react";
 
+
 function App() {
 
 
@@ -25,17 +26,46 @@ function App() {
   const addIDToSelection = (id) => {
       if (!selectedProductIDs.includes(id)) {
          setSelectedProductIDs((selProds) => [...selProds, id]);
-         console.log(selectedProductIDs.length);
+      
+         console.log(selectedProductIDs.length + 1);
+      
          
      
-      }
-      console.log(selectedProductIDs);
+      }  
+
+
   };
 
+  // remove button function
+  const removeIDFromSelection = (id) => {
+    if (selectedProductIDs.includes(id)) {
+      setSelectedProductIDs(products.filter(product => product.id !== product.id));
+      console.log(selectedProductIDs.length - 1);
+      
+    }
+  }
+
+  //title number
   const productNumber = selectedProductIDs.length; 
 
+  // map product cards
+  const productItems = products.map((product) =>
 
-  const productItems = products.map((product) =>  <div className="col d-flex"><div className="card p-4"><li key={product.id}>{product.name}</li><button className="btn btn-primary" onClick={() => addIDToSelection(product.id)}>Select</button></div></div>);
+    <div className="col d-flex">
+     <div className="card p-4">
+      <li key={product.id}>{product.name}</li>
+      <div className="row p-2">
+          <button className="btn btn-primary" onClick={() => { addIDToSelection(product.id)}}>Select</button>
+      </div>
+      <div className="row p-2">      
+      <button className="btn btn-danger" onClick={() => { removeIDFromSelection(product.id)}}>Remove</button>
+      </div>
+   
+      </div>
+    </div>
+
+    
+  );
 
   return (
     <div className="App">
